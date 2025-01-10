@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <!-- Using fragment -->
+    <div class="host-tag" th:replace="${isLogin} ? ~{base::parent(~{::#loggedIn}, 'two')} : ~{base::test(~{::#loggedOut})}">
+        <section id="loggedIn">
+            <h1>User is Logged IN</h1>
+            <hr />
+            <h3>This is dynamic content</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Fugit voluptatibus vero modi repellendus velit fuga possimus 
+                suscipit magni ipsa neque.
+            </p>
+        </section>
+        <section id="loggedOut">
+            <h1>User is Logged OUT</h1>
+            <hr />
+            <h3>This is dynamic content</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Fugit voluptatibus vero modi repellendus velit fuga possimus 
+                suscipit magni ipsa neque.
+            </p>
+        </section>
+    </div>
+</body>
+
+</html>
