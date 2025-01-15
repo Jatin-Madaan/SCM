@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html 
+    class="dark"
     lang="en" 
-    th:fragment="parent(content, title)"
+    th:fragment="parent(content, title, script)"
     xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -11,23 +12,15 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 </head>
 
-<body>
-    <ul class="p-4 flex flex-row">
-        <li class="px-2">
-            <a data-th-href="@{'/home'}">Home</a>
-        </li>
-        <li class="px-2">
-            <a data-th-href="@{'/services'}">Services</a>
-        </li>
-        <li>
-            <a data-th-href="@{'/about'}">About</a>
-        </li>
-    </ul>
+<body class="dark:bg-gray-700 dark:text-white">
+    <div data-th-replace="~{ navbar :: navbar}"></div>
     <!-- main content -->
-    <div>
+    <div class="p-4 h-screen w-full">
         <section data-th-replace="${content}"></section>
     </div>
+    <footer class="p-4">Footer: Smart contact manager</footer>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <th:block data-th-replace="${script}"></th:block>
 </body>
 
 </html>

@@ -7,6 +7,7 @@ mvnw
 mvnw.cmd
 src/main/resources/application.properties
 node_modules
+.DS_Store
 ### STS ###
 .apt_generated
 .classpath
