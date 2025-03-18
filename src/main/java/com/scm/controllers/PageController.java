@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.scm.entities.User;
 import com.scm.forms.UserForm;
+import com.scm.helpers.Message;
+import com.scm.helpers.MessageType;
 import com.scm.services.UserService;
 
 import ch.qos.logback.classic.Logger;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PageController {
@@ -62,7 +65,7 @@ public class PageController {
 
     // processing register form
     @PostMapping("/do-register")
-    public String processRegister(@ModelAttribute UserForm userForm) {
+    public String processRegister(@ModelAttribute UserForm userForm, HttpSession session) {
         // fetching data from form
         logger.info("Register form submitted : " + userForm);
         // validating user data
@@ -71,14 +74,16 @@ public class PageController {
             return "redirect:/register?error";
         }
         // saving data to database
-        User user = User.builder()
-            .name(userForm.getName())
-            .email(userForm.getEmail())
-            .password(userForm.getPassword())
-            .about(userForm.getAbout())
-            .phoneNumber(userForm.getPhoneNumber())
-            .build();
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setAbout(userForm.getAbout());
+        user.setPhoneNumber(userForm.getPhoneNumber());
         userService.saveUser(user);
+
+        Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();    
+        session.setAttribute("message", message);
         // redirecting to login page
         return "redirect:/register";
     }
